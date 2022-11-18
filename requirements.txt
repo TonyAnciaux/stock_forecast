@@ -1,0 +1,8 @@
+streamlit
+prophet
+yfinance
+plotly
+daal==2021.2.3
+numpy==1.22
+keyring==21.7
+urllib3==1.25

@@ -1,0 +1,65 @@
+import streamlit as st
+from datetime import date
+import yfinance as yf
+from prophet import Prophet
+from prophet.plot import plot_plotly
+from plotly import graph_objs as go
+
+
+START = "2015-01-01"
+TODAY = date.today().strftime("%Y-%m-%d")
+
+st.title("Stock Forecasting App")
+
+stocks = ("^GSPC", "^IXIC", "^DJI", "^N100", "FTSE", "^FCHI", "^GDAXI", "^BFX", "^N225", "^HSI",\
+     "AAPL", "GOOG", "MSFT", "TSLA", "NVDA", "AMD", "AMZN", "BABA", "META", "NIO")
+selected_stock = st.selectbox("Index/Stock for prediction", stocks)
+
+n_years = st.slider("Years of prediction:", 1, 10)
+period = n_years * 365
+
+
+@st.cache # Streamlit cache to prevent loading the data everytime
+def load_data(ticker):
+    data = yf.download(ticker, START, TODAY)
+    data.reset_index(inplace=True)
+    return data
+
+
+def plot_raw_data():
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=data["Date"], y=data["Open"], name="Open Price"))
+    fig.add_trace(go.Scatter(x=data["Date"], y=data["Close"], name="Close Price"))
+    fig.layout.update(title_text="Time Series Data", xaxis_rangeslider_visible=True)
+    st.plotly_chart(fig)
+
+
+data_load_state = st.text("Load data...")
+data = load_data(selected_stock)
+data_load_state.text("Data loaded!")
+
+st.subheader("Raw Data over the past 7 days")
+st.write(data.tail(7))
+
+plot_raw_data()
+
+# Forecasting
+df_train = data[["Date", "Close"]]
+df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})  # Rename to fit the model requirements
+
+model = Prophet()
+model.fit(df_train)
+
+future = model.make_future_dataframe(periods=period)
+forecast = model.predict(future)
+
+st.subheader("Forecast Data")
+st.write(forecast.tail(7))
+
+st.write("Forecast Graph")
+fig1 = plot_plotly(model, forecast)
+st.plotly_chart(fig1)
+
+st.write("Forecast Components")
+fig2 = model.plot_components(forecast)
+st.write(fig2)
