@@ -10,14 +10,18 @@ This project was thought as a coding/ML exercise. The predictions depicted by th
 
 ## Requirements
 
-streamlit
-prophet
-yfinance
-plotly
-daal==2021.2.3
-numpy==1.22
-keyring==21.7
-urllib3==1.25
+* streamlit
+* prophet
+* yfinance
+* plotly
+* daal==2021.2.3
+* numpy==1.22
+* keyring==21.7
+* urllib3==1.25
 
 `pip install -r requirements.txt` can be used in the terminal after downloading this repository. 
 
+
+## Demo
+
+You can test this app on Streamlit [here](https://tonyanciaux-stock-forecast-main-c4i8yv.streamlit.app/)
