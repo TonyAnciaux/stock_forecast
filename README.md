@@ -24,7 +24,11 @@ This project was thought as a coding/ML exercise. The predictions depicted by th
 
 ## Illustrations
 
+Situation of BEL20 Index from July to November 2022:
+
 ![BEL20](bel20_since07.png)
+
+BEL20 Trend Prediction for the following months:
 ![BEL20_pred](bel_20_forecast.png)
 
 
