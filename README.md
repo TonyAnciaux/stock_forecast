@@ -25,7 +25,7 @@ This project was thought as a coding/ML exercise. The predictions depicted by th
 ## Illustrations
 
 ![BEL20](bel20_since07.png)
-![BEL20_pred](bel_20_forecast)
+![BEL20_pred](bel_20_forecast.png)
 
 
 ## Demo
