@@ -6,15 +6,14 @@ from prophet.plot import plot_plotly
 from plotly import graph_objs as go
 
 
-START = "2015-01-01"
-TODAY = date.today().strftime("%Y-%m-%d")
-
 st.title("Stock Forecasting App")
 
 stocks = ("^GSPC", "^IXIC", "^DJI", "^N100", "FTSE", "^FCHI", "^GDAXI", "^BFX", "^N225", "^HSI",\
      "AAPL", "GOOG", "MSFT", "TSLA", "NVDA", "AMD", "AMZN", "BABA", "META", "NIO")
 selected_stock = st.selectbox("Index/Stock for prediction", stocks)
 
+START = st.date_input("Starting date for historical data:")
+TODAY = date.today().strftime("%Y-%m-%d")
 n_years = st.slider("Years of prediction:", 1, 10)
 period = n_years * 365
 
@@ -38,8 +37,8 @@ data_load_state = st.text("Load data...")
 data = load_data(selected_stock)
 data_load_state.text("Data loaded!")
 
-st.subheader("Raw Data over the past 7 days")
-st.write(data.tail(7))
+st.subheader("Raw Data over the past 30 days")
+st.write(data.tail(30))
 
 plot_raw_data()
 
