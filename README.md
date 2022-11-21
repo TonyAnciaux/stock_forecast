@@ -22,6 +22,12 @@ This project was thought as a coding/ML exercise. The predictions depicted by th
 `pip install -r requirements.txt` can be used in the terminal after downloading this repository. 
 
 
+## Illustrations
+
+![BEL20](bel20_since07.png)
+![BEL20_pred](bel_20_forecast)
+
+
 ## Demo
 
 You can test this app on Streamlit [here](https://tonyanciaux-stock-forecast-main-c4i8yv.streamlit.app/)
